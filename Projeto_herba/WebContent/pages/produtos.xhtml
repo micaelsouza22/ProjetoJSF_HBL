@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateSistema.xhtml">
+
+	<ui:define name="menu_superior">
+		<ui:include src="/includes/menu_superior.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form>
+			<p:dataTable var="produto" value="#{beanProdutos.listaProdutos}"
+				rows="20" paginator="true">
+				<f:facet name="header">
+            		Produtos
+        		</f:facet>
+				<p:column headerText="Código" sortBy="#{produto.idproduto}">
+					<h:outputText value="#{produto.idproduto}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{produto.nomeproduto}"
+					filterBy="#{produto.nomeproduto}">
+					<h:outputText value="#{produto.nomeproduto}" />
+				</p:column>
+
+				<p:column headerText="Categoria" sortBy="#{produto.categoria}"
+					filterBy="#{produto.categoria}">
+					<h:outputText value="#{produto.categoria}" />
+				</p:column>
+
+				<p:column headerText="Quantidade em Estoque"
+					sortBy="#{produto.qtdestoque}">
+					<h:outputText value="#{produto.qtdestoque}" />
+				</p:column>
+
+				<p:column headerText="Valor Unitário"
+					sortBy="#{produto.valorunitario}">
+					<h:outputText value="#{produto.valorunitario}" />
+				</p:column>
+				<f:facet name="footer">
+            		<p:commandButton value="Novo Produto"/>
+        		</f:facet>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
