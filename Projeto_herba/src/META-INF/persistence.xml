@@ -13,7 +13,7 @@
 		
 		<properties>
 			<property name="hibernate.connection.username" value="postgres" />
-			<property name="hibernate.connection.password" value="123" />
+			<property name="hibernate.connection.password" value="micaelkeyboard" />
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/Projeto_Herba" />
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
