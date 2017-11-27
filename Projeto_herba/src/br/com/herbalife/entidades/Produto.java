@@ -17,7 +17,7 @@ public class Produto implements Serializable {
 	@Id
 	private Integer idproduto;
 
-	private String categoria;
+	private Integer codbarras;
 
 	private String nomeproduto;
 
@@ -33,6 +33,11 @@ public class Produto implements Serializable {
 	@OneToMany(mappedBy="produto")
 	private List<Itempedido> itempedidos;
 
+	//bi-directional many-to-one association to Categoria
+	@ManyToOne
+	@JoinColumn(name="idcategoria")
+	private Categoria categoria;
+
 	public Produto() {
 	}
 
@@ -44,12 +49,12 @@ public class Produto implements Serializable {
 		this.idproduto = idproduto;
 	}
 
-	public String getCategoria() {
-		return this.categoria;
+	public Integer getCodbarras() {
+		return this.codbarras;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setCodbarras(Integer codbarras) {
+		this.codbarras = codbarras;
 	}
 
 	public String getNomeproduto() {
@@ -118,6 +123,14 @@ public class Produto implements Serializable {
 		itempedido.setProduto(null);
 
 		return itempedido;
+	}
+
+	public Categoria getCategoria() {
+		return this.categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
