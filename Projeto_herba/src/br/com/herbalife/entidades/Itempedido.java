@@ -18,7 +18,7 @@ public class Itempedido implements Serializable {
 
 	private Integer qtditem;
 
-	private String valortotal;
+	private double valortotal;
 
 	//bi-directional many-to-one association to Pedido
 	@ManyToOne
@@ -49,11 +49,11 @@ public class Itempedido implements Serializable {
 		this.qtditem = qtditem;
 	}
 
-	public String getValortotal() {
+	public double getValortotal() {
 		return this.valortotal;
 	}
 
-	public void setValortotal(String valortotal) {
+	public void setValortotal(double valortotal) {
 		this.valortotal = valortotal;
 	}
 

@@ -2,8 +2,8 @@ package br.com.herbalife.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -22,7 +22,7 @@ public class Pedido implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date datapedido;
 
-	private Time horapedido;
+	private Timestamp horapedido;
 
 	private double valortotalpedido;
 
@@ -59,11 +59,11 @@ public class Pedido implements Serializable {
 		this.datapedido = datapedido;
 	}
 
-	public Time getHorapedido() {
+	public Timestamp getHorapedido() {
 		return this.horapedido;
 	}
 
-	public void setHorapedido(Time horapedido) {
+	public void setHorapedido(Timestamp horapedido) {
 		this.horapedido = horapedido;
 	}
 

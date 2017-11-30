@@ -17,7 +17,7 @@ public class Produto implements Serializable {
 	@Id
 	private Integer idproduto;
 
-	private Integer codbarras;
+	private String codbarras;
 
 	private String nomeproduto;
 
@@ -38,6 +38,10 @@ public class Produto implements Serializable {
 	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
 
+	//bi-directional many-to-one association to RelacaoItemestoque
+	@OneToMany(mappedBy="produto")
+	private List<RelacaoItemestoque> relacaoItemestoques;
+
 	public Produto() {
 	}
 
@@ -49,11 +53,11 @@ public class Produto implements Serializable {
 		this.idproduto = idproduto;
 	}
 
-	public Integer getCodbarras() {
+	public String getCodbarras() {
 		return this.codbarras;
 	}
 
-	public void setCodbarras(Integer codbarras) {
+	public void setCodbarras(String codbarras) {
 		this.codbarras = codbarras;
 	}
 
@@ -131,6 +135,28 @@ public class Produto implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public List<RelacaoItemestoque> getRelacaoItemestoques() {
+		return this.relacaoItemestoques;
+	}
+
+	public void setRelacaoItemestoques(List<RelacaoItemestoque> relacaoItemestoques) {
+		this.relacaoItemestoques = relacaoItemestoques;
+	}
+
+	public RelacaoItemestoque addRelacaoItemestoque(RelacaoItemestoque relacaoItemestoque) {
+		getRelacaoItemestoques().add(relacaoItemestoque);
+		relacaoItemestoque.setProduto(this);
+
+		return relacaoItemestoque;
+	}
+
+	public RelacaoItemestoque removeRelacaoItemestoque(RelacaoItemestoque relacaoItemestoque) {
+		getRelacaoItemestoques().remove(relacaoItemestoque);
+		relacaoItemestoque.setProduto(null);
+
+		return relacaoItemestoque;
 	}
 
 }

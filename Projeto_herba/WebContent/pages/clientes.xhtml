@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateSistema.xhtml">
+
+	<ui:define name="menu_superior">
+		<ui:include src="/includes/menu_superior.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form>
+			<p:dataTable var="cliente" value="#{beanClientes.listaClientes}"
+				rows="20" paginator="true">
+				<f:facet name="header">
+            		Clientes
+        		</f:facet>
+				<p:column headerText="Código"
+					sortBy="#{cliente.idcliente}">
+					<h:outputText value="#{cliente.idcliente}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{cliente.nomecliente}"
+					filterBy="#{cliente.nomecliente}">
+					<h:outputText value="#{cliente.nomecliente}" />
+				</p:column>
+
+				<p:column headerText="CPF" sortBy="#{cliente.cpf}"
+					filterBy="#{cliente.cpf}">
+					<h:outputText value="#{cliente.cpf}" />
+				</p:column>
+
+				<p:column headerText="Data de Nascimento"
+					sortBy="#{cliente.dtnasc}">
+					<h:outputText value="#{cliente.dtnasc}" />
+				</p:column>
+
+				<p:column headerText="Contato"
+					sortBy="#{cliente.telefone}">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+				
+				<p:column headerText="Endereço"
+					sortBy="#{cliente.endereco1}">
+					<h:outputText value="#{cliente.endereco1}" />
+				</p:column>
+				<f:facet name="footer">
+					<p:commandButton value="Novo Cliente"
+						onclick="PF('dlgNovoCliente').show();" />
+				</f:facet>
+			</p:dataTable>
+		</h:form>
+		<p:dialog header="Novo Cliente" widgetVar="dlgNovoCliente"
+			modal="true" closable="false" draggable="false" resizable="false"
+			appendTo="@(body)">
+			<h:form id="formNovoCliente">
+				<h:panelGrid id="panelNovoCliente" columns="2">
+					<p:outputLabel value="Nome: " />
+					<p:inputText value="#{beanClientes.clientes.nomecliente}"/>
+
+					<p:outputLabel value="CPF: " />
+					<p:inputText value="#{beanClientes.clientes.cpf}"/>
+
+					<p:outputLabel value="Data de Nascimento: " />
+					<p:inputText value="#{beanClientes.clientes.dtnasc}"/>
+
+					<p:outputLabel value="Telefone: " />
+					<p:inputText value="#{beanClientes.clientes.telefone}"/>
+
+					<p:outputLabel value="Endereço: " />
+					<p:inputText value="#{beanClientes.clientes.endereco1}"/>
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('dlgNovoCliente').hide();" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>

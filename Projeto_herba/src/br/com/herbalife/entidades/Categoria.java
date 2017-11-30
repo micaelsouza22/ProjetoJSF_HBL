@@ -17,7 +17,7 @@ public class Categoria implements Serializable {
 	@Id
 	private Integer idcategoria;
 
-	private String categoria;
+	private String descricao;
 
 	//bi-directional many-to-one association to Produto
 	@OneToMany(mappedBy="categoria")
@@ -34,12 +34,12 @@ public class Categoria implements Serializable {
 		this.idcategoria = idcategoria;
 	}
 
-	public String getCategoria() {
-		return this.categoria;
+	public String getDescricao() {
+		return this.descricao;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public List<Produto> getProdutos() {

@@ -18,10 +18,22 @@ public class Estoque implements Serializable {
 
 	private Integer qtd;
 
+	private Integer qtdatual;
+
+	private Integer qtdcomprada;
+
+	private Integer qtdmaxima;
+
+	private Integer qtdminima;
+
 	//bi-directional many-to-one association to Produto
 	@ManyToOne
 	@JoinColumn(name="idproduto")
 	private Produto produto;
+
+	//bi-directional one-to-one association to RelacaoItemestoque
+	@OneToOne(mappedBy="estoque")
+	private RelacaoItemestoque relacaoItemestoque;
 
 	public Estoque() {
 	}
@@ -42,12 +54,52 @@ public class Estoque implements Serializable {
 		this.qtd = qtd;
 	}
 
+	public Integer getQtdatual() {
+		return this.qtdatual;
+	}
+
+	public void setQtdatual(Integer qtdatual) {
+		this.qtdatual = qtdatual;
+	}
+
+	public Integer getQtdcomprada() {
+		return this.qtdcomprada;
+	}
+
+	public void setQtdcomprada(Integer qtdcomprada) {
+		this.qtdcomprada = qtdcomprada;
+	}
+
+	public Integer getQtdmaxima() {
+		return this.qtdmaxima;
+	}
+
+	public void setQtdmaxima(Integer qtdmaxima) {
+		this.qtdmaxima = qtdmaxima;
+	}
+
+	public Integer getQtdminima() {
+		return this.qtdminima;
+	}
+
+	public void setQtdminima(Integer qtdminima) {
+		this.qtdminima = qtdminima;
+	}
+
 	public Produto getProduto() {
 		return this.produto;
 	}
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public RelacaoItemestoque getRelacaoItemestoque() {
+		return this.relacaoItemestoque;
+	}
+
+	public void setRelacaoItemestoque(RelacaoItemestoque relacaoItemestoque) {
+		this.relacaoItemestoque = relacaoItemestoque;
 	}
 
 }

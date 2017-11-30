@@ -29,8 +29,13 @@ public class Cliente implements Serializable {
 
 	//bi-directional many-to-one association to Endereco
 	@ManyToOne
+	@JoinColumn(name="idend")
+	private Endereco endereco1;
+
+	//bi-directional many-to-one association to Endereco
+	@ManyToOne
 	@JoinColumn(name="idendereco")
-	private Endereco endereco;
+	private Endereco endereco2;
 
 	//bi-directional many-to-one association to Dadosacompanhamento
 	@OneToMany(mappedBy="cliente")
@@ -83,12 +88,20 @@ public class Cliente implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public Endereco getEndereco() {
-		return this.endereco;
+	public Endereco getEndereco1() {
+		return this.endereco1;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setEndereco1(Endereco endereco1) {
+		this.endereco1 = endereco1;
+	}
+
+	public Endereco getEndereco2() {
+		return this.endereco2;
+	}
+
+	public void setEndereco2(Endereco endereco2) {
+		this.endereco2 = endereco2;
 	}
 
 	public List<Dadosacompanhamento> getDadosacompanhamentos() {
