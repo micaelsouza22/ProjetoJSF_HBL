@@ -15,7 +15,7 @@ public class Endereco implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer idend;
+	private Integer idendereco;
 
 	private String bairro;
 
@@ -23,30 +23,26 @@ public class Endereco implements Serializable {
 
 	private String complemento;
 
-	private String estado;
-
 	@Column(name="numero_casa")
 	private Integer numeroCasa;
 
 	private String rua;
 
-	//bi-directional many-to-one association to Cliente
-	@OneToMany(mappedBy="endereco1")
-	private List<Cliente> clientes1;
+	private String uf;
 
 	//bi-directional many-to-one association to Cliente
-	@OneToMany(mappedBy="endereco2")
-	private List<Cliente> clientes2;
+	@OneToMany(mappedBy="endereco")
+	private List<Cliente> clientes;
 
 	public Endereco() {
 	}
 
-	public Integer getIdend() {
-		return this.idend;
+	public Integer getIdendereco() {
+		return this.idendereco;
 	}
 
-	public void setIdend(Integer idend) {
-		this.idend = idend;
+	public void setIdendereco(Integer idendereco) {
+		this.idendereco = idendereco;
 	}
 
 	public String getBairro() {
@@ -73,14 +69,6 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 	}
 
-	public String getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
 	public Integer getNumeroCasa() {
 		return this.numeroCasa;
 	}
@@ -97,48 +85,34 @@ public class Endereco implements Serializable {
 		this.rua = rua;
 	}
 
-	public List<Cliente> getClientes1() {
-		return this.clientes1;
+	public String getUf() {
+		return this.uf;
 	}
 
-	public void setClientes1(List<Cliente> clientes1) {
-		this.clientes1 = clientes1;
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
 
-	public Cliente addClientes1(Cliente clientes1) {
-		getClientes1().add(clientes1);
-		clientes1.setEndereco1(this);
-
-		return clientes1;
+	public List<Cliente> getClientes() {
+		return this.clientes;
 	}
 
-	public Cliente removeClientes1(Cliente clientes1) {
-		getClientes1().remove(clientes1);
-		clientes1.setEndereco1(null);
-
-		return clientes1;
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
-	public List<Cliente> getClientes2() {
-		return this.clientes2;
+	public Cliente addCliente(Cliente cliente) {
+		getClientes().add(cliente);
+		cliente.setEndereco(this);
+
+		return cliente;
 	}
 
-	public void setClientes2(List<Cliente> clientes2) {
-		this.clientes2 = clientes2;
-	}
+	public Cliente removeCliente(Cliente cliente) {
+		getClientes().remove(cliente);
+		cliente.setEndereco(null);
 
-	public Cliente addClientes2(Cliente clientes2) {
-		getClientes2().add(clientes2);
-		clientes2.setEndereco2(this);
-
-		return clientes2;
-	}
-
-	public Cliente removeClientes2(Cliente clientes2) {
-		getClientes2().remove(clientes2);
-		clientes2.setEndereco2(null);
-
-		return clientes2;
+		return cliente;
 	}
 
 }

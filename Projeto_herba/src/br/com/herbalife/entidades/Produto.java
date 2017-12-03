@@ -17,11 +17,9 @@ public class Produto implements Serializable {
 	@Id
 	private Integer idproduto;
 
-	private String codbarras;
+	private Integer codbarras;
 
 	private String nomeproduto;
-
-	private Integer qtdestoque;
 
 	private double valorunitario;
 
@@ -38,10 +36,6 @@ public class Produto implements Serializable {
 	@JoinColumn(name="idcategoria")
 	private Categoria categoria;
 
-	//bi-directional many-to-one association to RelacaoItemestoque
-	@OneToMany(mappedBy="produto")
-	private List<RelacaoItemestoque> relacaoItemestoques;
-
 	public Produto() {
 	}
 
@@ -53,11 +47,11 @@ public class Produto implements Serializable {
 		this.idproduto = idproduto;
 	}
 
-	public String getCodbarras() {
+	public Integer getCodbarras() {
 		return this.codbarras;
 	}
 
-	public void setCodbarras(String codbarras) {
+	public void setCodbarras(Integer codbarras) {
 		this.codbarras = codbarras;
 	}
 
@@ -67,14 +61,6 @@ public class Produto implements Serializable {
 
 	public void setNomeproduto(String nomeproduto) {
 		this.nomeproduto = nomeproduto;
-	}
-
-	public Integer getQtdestoque() {
-		return this.qtdestoque;
-	}
-
-	public void setQtdestoque(Integer qtdestoque) {
-		this.qtdestoque = qtdestoque;
 	}
 
 	public double getValorunitario() {
@@ -135,28 +121,6 @@ public class Produto implements Serializable {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-
-	public List<RelacaoItemestoque> getRelacaoItemestoques() {
-		return this.relacaoItemestoques;
-	}
-
-	public void setRelacaoItemestoques(List<RelacaoItemestoque> relacaoItemestoques) {
-		this.relacaoItemestoques = relacaoItemestoques;
-	}
-
-	public RelacaoItemestoque addRelacaoItemestoque(RelacaoItemestoque relacaoItemestoque) {
-		getRelacaoItemestoques().add(relacaoItemestoque);
-		relacaoItemestoque.setProduto(this);
-
-		return relacaoItemestoque;
-	}
-
-	public RelacaoItemestoque removeRelacaoItemestoque(RelacaoItemestoque relacaoItemestoque) {
-		getRelacaoItemestoques().remove(relacaoItemestoque);
-		relacaoItemestoque.setProduto(null);
-
-		return relacaoItemestoque;
 	}
 
 }
