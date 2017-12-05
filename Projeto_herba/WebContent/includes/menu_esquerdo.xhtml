@@ -8,12 +8,12 @@
 <h:form>
     <p:growl autoUpdate="true"/>
  
-    <p:panelMenu style="width:300px">
+    <p:panelMenu style="width:200px">
         <p:submenu label="Cadastro">
             <p:menuitem value="Cliente" actionListener="#{menuView.save}" icon="ui-icon-disk" />
             <p:menuitem value="Produto" actionListener="#{menuView.update}"  icon="ui-icon-arrowrefresh-1-w" />
         </p:submenu>
-        <p:submenu label="Histórico Vendas">
+        <p:submenu label="Histórico de Vendas">
             <p:menuitem value="Histórico" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
         </p:submenu>
         <p:separator />
