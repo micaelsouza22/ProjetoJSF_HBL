@@ -1,10 +1,10 @@
 package br.com.herbalife.entidades;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * The persistent class for the cliente database table.
@@ -15,12 +15,15 @@ import java.util.List;
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+//	private static final String TemporalType = null;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idcliente;
 
 	private String cpf;
 
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	private Date dtnasc;
 
 	private String nomecliente;

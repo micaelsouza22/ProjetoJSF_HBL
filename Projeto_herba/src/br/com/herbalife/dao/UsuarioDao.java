@@ -9,4 +9,9 @@ public class UsuarioDao extends GenericDao<Usuario>{
 
 	}
 
+	public void autenticar(String cpf, String senha) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -37,10 +37,10 @@
 					<h:outputText value="#{produto.categoria.descricao}" />
 				</p:column>
 
-				<p:column headerText="Quantidade em Estoque"
-					sortBy="#{produto.qtdestoque}">
-					<h:outputText value="#{produto.qtdestoque}" />
-				</p:column>
+				<!-- 				<p:column headerText="Quantidade em Estoque" -->
+				<!-- 					sortBy="#{produto.qtdestoque}"> -->
+				<!-- 					<h:outputText value="#{produto.qtdestoque}" /> -->
+				<!-- 				</p:column> -->
 
 				<p:column headerText="Valor Unitário"
 					sortBy="#{produto.valorunitario}">
@@ -58,22 +58,17 @@
 			<h:form id="formNovoProduto">
 				<h:panelGrid id="panelNovoProduto" columns="2">
 					<p:outputLabel value="Código de barras: " />
-					<p:inputText value="#{beanProdutos.produtos.codbarras}"/>
-
+					<p:inputText value="#{beanProdutos.produtos.codbarras}" />
 					<p:outputLabel value="Nome do produto: " />
-					<p:inputText value="#{beanProdutos.produtos.nomeproduto}"/>
+					<p:inputText value="#{beanProdutos.produtos.nomeproduto}" />
 
 					<p:outputLabel value="Categoria: " />
-					<p:inputText value="#{beanProdutos.produtos.categoria.idcategoria}"/>
+					<p:inputText value="#{beanProdutos.produtos.categoria.idcategoria}" />
 
 					<p:outputLabel value="Valor unitário: " />
-					<p:inputText value="#{beanProdutos.produtos.valorunitario}"/>
+					<p:inputText value="#{beanProdutos.produtos.valorunitario}" />
 
-					<p:outputLabel value="Quantidade a cadastrar: " />
-					<p:inputText value="#{beanProdutos.produtos.qtdestoque}"/>
 
-					<p:outputLabel value="Data de compra: " />
-					<p:calendar id="popup" value="#{beanProdutos.produtos.}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" />
