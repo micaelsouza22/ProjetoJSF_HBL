@@ -15,7 +15,7 @@ import br.com.herbalife.entidades.Produto;
 @SuppressWarnings("serial")
 @ManagedBean
 @ViewScoped
-public class BeanProdutos implements Serializable{
+public class BeanProdutos implements Serializable {
 
 	private List<Produto> listaProdutos;
 	private List<Categoria> listaCategorias;
@@ -28,11 +28,11 @@ public class BeanProdutos implements Serializable{
 		daoCategoria = new CategoriaDao();
 		produtos = new Produto();
 	}
-	
+
 	public List<Produto> getListaProdutos() {
 		return listaProdutos;
 	}
-	
+
 	public Produto getProdutos() {
 		return produtos;
 	}
@@ -46,9 +46,38 @@ public class BeanProdutos implements Serializable{
 	}
 
 	@PostConstruct
-	public void carregaDadosTabela(){
-		listaProdutos = daoProdutos.listar("nomeproduto");
-		listaCategorias = daoCategoria.listar(null);
+	public void carregaDadosTabela() {
+		try {
+
+			listaProdutos = daoProdutos.listar("nomeproduto");
+			listaCategorias = daoCategoria.listar(null);
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+	}
+
+	public void preparaNovoProduto() {
+		try {
+			
+			produtos = new Produto();
+			listaCategorias = daoCategoria.listar(null);
+			
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 	
+	public void salvarProduto() {
+		try {
+			
+			daoProdutos.salvar(produtos);
+			listaProdutos = daoProdutos.listar("nomeproduto");
+			
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
 }

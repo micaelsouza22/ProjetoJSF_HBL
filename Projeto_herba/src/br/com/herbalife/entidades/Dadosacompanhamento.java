@@ -15,7 +15,7 @@ public class Dadosacompanhamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer idmedid;
+	private Integer idmedida;
 
 	private double cintura;
 
@@ -48,12 +48,12 @@ public class Dadosacompanhamento implements Serializable {
 	public Dadosacompanhamento() {
 	}
 
-	public Integer getIdmedid() {
-		return this.idmedid;
+	public Integer getIdmedida() {
+		return this.idmedida;
 	}
 
-	public void setIdmedid(Integer idmedid) {
-		this.idmedid = idmedid;
+	public void setIdmedida(Integer idmedida) {
+		this.idmedida = idmedida;
 	}
 
 	public double getCintura() {

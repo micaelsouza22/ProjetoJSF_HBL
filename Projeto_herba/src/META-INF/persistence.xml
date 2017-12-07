@@ -9,7 +9,6 @@
 		<class>br.com.herbalife.entidades.Itempedido</class>
 		<class>br.com.herbalife.entidades.Pedido</class>
 		<class>br.com.herbalife.entidades.Produto</class>
-		<class>br.com.herbalife.entidades.RelacaoItemestoque</class>
 		<class>br.com.herbalife.entidades.Tipodepagmt</class>
 		<class>br.com.herbalife.entidades.Usuario</class>
 		

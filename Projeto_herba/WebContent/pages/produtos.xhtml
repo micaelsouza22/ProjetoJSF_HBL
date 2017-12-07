@@ -10,14 +10,15 @@
 	<ui:define name="menu_superior">
 		<ui:include src="/includes/menu_superior.xhtml" />
 	</ui:define>
+
 	<ui:define name="menu_esquerdo">
 		<ui:include src="/includes/menu_esquerdo.xhtml" />
 	</ui:define>
 
 	<ui:define name="conteudo">
 
-		<h:form>
-			<p:dataTable var="produto" value="#{beanProdutos.listaProdutos}"
+		<h:form id="formProdutosT">
+			<p:dataTable id="tabelaProdutos" var="produto" value="#{beanProdutos.listaProdutos}"
 				rows="20" paginator="true">
 				<f:facet name="header">
             		Produtos
@@ -33,22 +34,20 @@
 				</p:column>
 
 				<p:column headerText="Categoria" sortBy="#{produto.categoria}"
-					filterBy="#{produto.categoria}">
+					filterBy="#{produto.categoria.descricao}">
 					<h:outputText value="#{produto.categoria.descricao}" />
-				</p:column>
-
-				<p:column headerText="Quantidade em Estoque"
-					sortBy="#{produto.qtdestoque}">
-					<h:outputText value="#{produto.qtdestoque}" />
 				</p:column>
 
 				<p:column headerText="Valor Unitário"
 					sortBy="#{produto.valorunitario}">
 					<h:outputText value="#{produto.valorunitario}" />
 				</p:column>
+				
 				<f:facet name="footer">
-					<p:commandButton value="Novo Produto"
-						onclick="PF('dlgNovoProduto').show();" />
+					<p:commandButton value="Novo Produto" actionListener="#{beanProdutos.preparaNovoProduto}"
+						oncomplete="PF('dlgNovoProduto').show();" />
+					<p:commandButton value="Estoque" onclick="PF('dlgEstoque').show();" 
+					update=":formNovoProduto:panelNovoProduto"/>
 				</f:facet>
 			</p:dataTable>
 		</h:form>
@@ -58,30 +57,33 @@
 			<h:form id="formNovoProduto">
 				<h:panelGrid id="panelNovoProduto" columns="2">
 					<p:outputLabel value="Código de barras: " />
-					<p:inputText value="#{beanProdutos.produtos.codbarras}"/>
+					<p:inputText value="#{beanProdutos.produtos.codbarras}" />
 
 					<p:outputLabel value="Nome do produto: " />
-					<p:inputText value="#{beanProdutos.produtos.nomeproduto}"/>
+					<p:inputText value="#{beanProdutos.produtos.nomeproduto}" />
 
 					<p:outputLabel value="Categoria: " />
-					<p:inputText value="#{beanProdutos.produtos.categoria.idcategoria}"/>
+					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}" 
+					converter="omnifaces.SelectItemsConverter" filter="true" styleClass="inputs">
+						<f:selectItem itemLabel="Selecione.." itemValue="" noSelectionOption="true"/>
+						<f:selectItems value="#{beanProdutos.listaCategorias}" var="categoria"
+						 itemLabel="#{categoria.descricao}" itemValue="#{categoria}"/>					
+					</p:selectOneMenu>
 
 					<p:outputLabel value="Valor unitário: " />
-					<p:inputText value="#{beanProdutos.produtos.valorunitario}"/>
+					<p:inputText value="#{beanProdutos.produtos.valorunitario}" />
 
-					<p:outputLabel value="Quantidade a cadastrar: " />
-					<p:inputText value="#{beanProdutos.produtos.qtdestoque}"/>
-
-					<p:outputLabel value="Data de compra: " />
-					<p:calendar id="popup" value="#{beanProdutos.produtos.}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" />
+					<p:commandButton value="Salvar" actionListener="#{beanProdutos.salvarProduto}" 
+					oncomplete="PF('dlgNovoProduto').hide();" update=":formProdutosT:tabelaProdutos"/>
 					<p:commandButton value="Cancelar"
 						onclick="PF('dlgNovoProduto').hide();" />
 				</h:panelGrid>
 			</h:form>
+
 		</p:dialog>
+		
 	</ui:define>
 
 </ui:composition>
