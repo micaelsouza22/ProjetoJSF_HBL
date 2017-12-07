@@ -1,10 +1,10 @@
 package br.com.herbalife.entidades;
 
 import java.io.Serializable;
-import java.util.*;
-
-import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
 
 /**
  * The persistent class for the cliente database table.
@@ -15,25 +15,25 @@ import javax.persistence.*;
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-//	private static final String TemporalType = null;
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idcliente;
+
+	private String cidade;
+
+	private String complemento;
 
 	private String cpf;
 
-//	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	private Date dtnasc;
+
+	private String endereco;
 
 	private String nomecliente;
 
-	private String telefone;
+	private Integer numero;
 
-	//bi-directional many-to-one association to Endereco
-	@ManyToOne
-	@JoinColumn(name="idendereco")
-	private Endereco endereco;
+	private String telefone;
 
 	//bi-directional many-to-one association to Dadosacompanhamento
 	@OneToMany(mappedBy="cliente")
@@ -42,6 +42,11 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to Pedido
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos;
+
+	//bi-directional many-to-one association to Estado
+	@ManyToOne
+	@JoinColumn(name="idestado")
+	private Estado estado;
 
 	public Cliente() {
 	}
@@ -52,6 +57,22 @@ public class Cliente implements Serializable {
 
 	public void setIdcliente(Integer idcliente) {
 		this.idcliente = idcliente;
+	}
+
+	public String getCidade() {
+		return this.cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getComplemento() {
+		return this.complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
 	public String getCpf() {
@@ -70,6 +91,14 @@ public class Cliente implements Serializable {
 		this.dtnasc = dtnasc;
 	}
 
+	public String getEndereco() {
+		return this.endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
 	public String getNomecliente() {
 		return this.nomecliente;
 	}
@@ -78,20 +107,20 @@ public class Cliente implements Serializable {
 		this.nomecliente = nomecliente;
 	}
 
+	public Integer getNumero() {
+		return this.numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
 	public String getTelefone() {
 		return this.telefone;
 	}
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public Endereco getEndereco() {
-		return this.endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
 	}
 
 	public List<Dadosacompanhamento> getDadosacompanhamentos() {
@@ -136,6 +165,14 @@ public class Cliente implements Serializable {
 		pedido.setCliente(null);
 
 		return pedido;
+	}
+
+	public Estado getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 }

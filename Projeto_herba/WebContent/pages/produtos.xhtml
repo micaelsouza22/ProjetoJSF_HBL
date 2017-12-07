@@ -18,8 +18,8 @@
 	<ui:define name="conteudo">
 
 		<h:form id="formProdutosT">
-			<p:dataTable id="tabelaProdutos" var="produto" value="#{beanProdutos.listaProdutos}"
-				rows="20" paginator="true">
+			<p:dataTable id="tabelaProdutos" var="produto"
+				value="#{beanProdutos.listaProdutos}" rows="20" paginator="true">
 				<f:facet name="header">
             		Produtos
         		</f:facet>
@@ -37,20 +37,55 @@
 					filterBy="#{produto.categoria.descricao}">
 					<h:outputText value="#{produto.categoria.descricao}" />
 				</p:column>
-
+				
 
 				<p:column headerText="Valor Unitário"
 					sortBy="#{produto.valorunitario}">
 					<h:outputText value="#{produto.valorunitario}" />
 				</p:column>
-				
+
+<!-- 				botao editar -->
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-pencil" title="Editar Produto"
+						actionListener="#{beanProdutos.alterarProduto}"
+						update=":formNovoProduto:panelNovoProduto"
+						onclick="PF('dlgNovoProduto').show();">
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+					</p:commandButton>
+					
+<!-- 					Botao deletar -->
+					<p:commandButton icon="ui-icon-trash" title="Deletar Produto"
+						actionListener="#{beanProdutos.removerProduto}"
+						update=":formProdutosT:tabelaProdutos :mensagemGlobal">
+						<p:confirm header="Confirmação de Remoção"
+							message="Deseja Excluir o Produto '#{produto.nomeproduto}'?"
+							icon="ui-icon-alert" />
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+					</p:commandButton>
+					
+					<p:commandButton value="Estoque">
+					
+					</p:commandButton>
+
+				</p:column>
+
 				<f:facet name="footer">
-					<p:commandButton value="Novo Produto" actionListener="#{beanProdutos.preparaNovoProduto}"
+					<p:commandButton value="Novo Produto"
+						actionListener="#{beanProdutos.preparaNovoProduto}"
 						oncomplete="PF('dlgNovoProduto').show();" />
-					<p:commandButton value="Estoque" onclick="PF('dlgEstoque').show();" 
-					update=":formNovoProduto:panelNovoProduto"/>
+					<p:commandButton value="Estoque" onclick="PF('dlgEstoque').show();"
+						update=":formNovoProduto:panelNovoProduto" />
 				</f:facet>
+
 			</p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
 		</h:form>
 		<p:dialog header="Novo Produto" widgetVar="dlgNovoProduto"
 			modal="true" closable="false" draggable="false" resizable="false"
@@ -65,11 +100,14 @@
 
 					<p:outputLabel value="Categoria: " />
 
-					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}" 
-					converter="omnifaces.SelectItemsConverter" filter="true" styleClass="inputs">
-						<f:selectItem itemLabel="Selecione.." itemValue="" noSelectionOption="true"/>
-						<f:selectItems value="#{beanProdutos.listaCategorias}" var="categoria"
-						 itemLabel="#{categoria.descricao}" itemValue="#{categoria}"/>					
+					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}"
+						converter="omnifaces.SelectItemsConverter" filter="true"
+						styleClass="inputs">
+						<f:selectItem itemLabel="Selecione.." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanProdutos.listaCategorias}"
+							var="categoria" itemLabel="#{categoria.descricao}"
+							itemValue="#{categoria}" />
 					</p:selectOneMenu>
 
 
@@ -79,15 +117,17 @@
 
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" actionListener="#{beanProdutos.salvarProduto}" 
-					oncomplete="PF('dlgNovoProduto').hide();" update=":formProdutosT:tabelaProdutos"/>
+					<p:commandButton value="Salvar"
+						actionListener="#{beanProdutos.salvarProduto}"
+						oncomplete="PF('dlgNovoProduto').hide();"
+						update=":formProdutosT:tabelaProdutos :mensagemGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('dlgNovoProduto').hide();" />
 				</h:panelGrid>
 			</h:form>
 
 		</p:dialog>
-		
+
 	</ui:define>
 
 </ui:composition>
