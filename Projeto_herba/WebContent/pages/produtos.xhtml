@@ -38,6 +38,7 @@
 					<h:outputText value="#{produto.categoria.descricao}" />
 				</p:column>
 
+
 				<p:column headerText="Valor Unitário"
 					sortBy="#{produto.valorunitario}">
 					<h:outputText value="#{produto.valorunitario}" />
@@ -63,6 +64,7 @@
 					<p:inputText value="#{beanProdutos.produtos.nomeproduto}" />
 
 					<p:outputLabel value="Categoria: " />
+
 					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}" 
 					converter="omnifaces.SelectItemsConverter" filter="true" styleClass="inputs">
 						<f:selectItem itemLabel="Selecione.." itemValue="" noSelectionOption="true"/>
@@ -70,8 +72,10 @@
 						 itemLabel="#{categoria.descricao}" itemValue="#{categoria}"/>					
 					</p:selectOneMenu>
 
+
 					<p:outputLabel value="Valor unitário: " />
 					<p:inputText value="#{beanProdutos.produtos.valorunitario}" />
+
 
 				</h:panelGrid>
 				<h:panelGrid columns="2">

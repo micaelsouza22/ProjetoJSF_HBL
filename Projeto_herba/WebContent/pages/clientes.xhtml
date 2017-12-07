@@ -18,11 +18,11 @@
 
 		<h:form>
 			<p:dataTable var="cliente" value="#{beanClientes.listaClientes}"
-				rows="20" paginator="true">
+				rows="25" paginator="true">
 				<f:facet name="header">
             		Clientes
         		</f:facet>
-				<p:column headerText="Código"
+				<p:column headerText="Código do Cliente"
 					sortBy="#{cliente.idcliente}">
 					<h:outputText value="#{cliente.idcliente}" />
 				</p:column>
@@ -32,25 +32,22 @@
 					<h:outputText value="#{cliente.nomecliente}" />
 				</p:column>
 
-				<p:column headerText="CPF" sortBy="#{cliente.cpf}"
-					filterBy="#{cliente.cpf}">
+				<p:column headerText="CPF" filterBy="#{cliente.cpf}">
 					<h:outputText value="#{cliente.cpf}" />
 				</p:column>
 
-				<p:column headerText="Data de Nascimento"
-					sortBy="#{cliente.dtnasc}">
+				<p:column headerText="Data de Nascimento" sortBy="#{cliente.dtnasc}">
 					<h:outputText value="#{cliente.dtnasc}" />
 				</p:column>
 
-				<p:column headerText="Contato"
-					sortBy="#{cliente.telefone}">
+				<p:column headerText="Contato" sortBy="#{cliente.telefone}">
 					<h:outputText value="#{cliente.telefone}" />
 				</p:column>
-				
-				<p:column headerText="Endereço"
-					sortBy="#{cliente.endereco1}">
-					<h:outputText value="#{cliente.endereco1}" />
+
+				<p:column headerText="Endereço">
+					<h:outputText value="#{cliente.endereco.rua}" />
 				</p:column>
+
 				<f:facet name="footer">
 					<p:commandButton value="Novo Cliente"
 						onclick="PF('dlgNovoCliente').show();" />
@@ -62,20 +59,19 @@
 			appendTo="@(body)">
 			<h:form id="formNovoCliente">
 				<h:panelGrid id="panelNovoCliente" columns="2">
-					<p:outputLabel value="Nome: " />
-					<p:inputText value="#{beanClientes.clientes.nomecliente}"/>
+
+					<p:outputLabel value="Nome Completo: " />
+					<p:inputText value="#{beanClientes.clientes.nomecliente}" />
 
 					<p:outputLabel value="CPF: " />
-					<p:inputText value="#{beanClientes.clientes.cpf}"/>
+					<p:inputText value="#{beanClientes.clientes.cpf}" />
 
 					<p:outputLabel value="Data de Nascimento: " />
 					<p:inputText value="#{beanClientes.clientes.dtnasc}"/>
 
 					<p:outputLabel value="Telefone: " />
-					<p:inputText value="#{beanClientes.clientes.telefone}"/>
+					<p:inputText value="#{beanClientes.clientes.telefone}" />
 
-					<p:outputLabel value="Endereço: " />
-					<p:inputText value="#{beanClientes.clientes.endereco1}"/>
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" />

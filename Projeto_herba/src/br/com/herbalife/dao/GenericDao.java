@@ -83,7 +83,7 @@ public class GenericDao<Entidade> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Entidade localizarAtributo(String atributo, String campoProcurado){
+	public Entidade localizarPorAtributo(String atributo, String campoProcurado){
 		return (Entidade) em.createQuery("FROM " + classe.getName() + " WHERE "+ atributo + " = :campo")
 				.setParameter("campo", campoProcurado).getSingleResult();
 	}

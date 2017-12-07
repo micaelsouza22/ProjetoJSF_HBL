@@ -15,8 +15,10 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+
 	@Column(name="idproduto", unique=true, nullable=false)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+
 	private Integer idproduto;
 
 	private Integer codbarras;

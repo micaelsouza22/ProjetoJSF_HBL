@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
@@ -12,13 +12,13 @@
 		<h:outputStylesheet library="css" name="estilo.css" />
 	</h:head>
 	<h:body>
-		<p:layout fullPage="true">
+		<p:layout fullPage="true" >
 
 			<p:layoutUnit position="north">
 				<ui:insert name="menu_superior" />
 			</p:layoutUnit>
 
-			<p:layoutUnit position="west" size="200" header="Menu"
+			<p:layoutUnit position="west" size="208" header="Menu"
 				resizable="false" closable="false" collapsible="true">
 				<ui:insert name="menu_esquerdo" />
 			</p:layoutUnit>
@@ -34,4 +34,4 @@
 
 		</p:layout>
 	</h:body>
-</ui:composition>
+</html>
