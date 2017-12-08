@@ -9,8 +9,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import br.com.herbalife.dao.CategoriaDao;
+import br.com.herbalife.dao.EstoqueDao;
 import br.com.herbalife.dao.ProdutoDao;
 import br.com.herbalife.entidades.Categoria;
+import br.com.herbalife.entidades.Estoque;
 import br.com.herbalife.entidades.Produto;
 import br.com.herbalife.util.JSFUtil;
 
@@ -21,9 +23,13 @@ public class BeanProdutos implements Serializable {
 
 	private List<Produto> listaProdutos;
 	private List<Categoria> listaCategorias;
+	private List<Estoque> listaEstoque;
 	private ProdutoDao daoProdutos;
 	private CategoriaDao daoCategoria;
 	private Produto produtos;
+	
+	private EstoqueDao daoestoque;
+	
 
 	public BeanProdutos() {
 		daoProdutos = new ProdutoDao();
@@ -65,6 +71,7 @@ public class BeanProdutos implements Serializable {
 			
 			produtos = new Produto();
 			listaCategorias = daoCategoria.listar(null);
+			listaEstoque = daoestoque.listar(null);
 			
 		} catch (Exception e) {
 			e.getMessage();
@@ -76,15 +83,29 @@ public class BeanProdutos implements Serializable {
 			
 			daoProdutos.salvar(produtos);
 			listaProdutos = daoProdutos.listar("nomeproduto");
-			
 			JSFUtil.mensagemSucesso("Produto salvo com sucesso!");
 		} catch (Exception e) {
 			JSFUtil.mensagemErro("ERRO: " + e.getMessage());
+			JSFUtil.mensagemSucesso("Produto Salvo com Sucesso!");
+			
 		}
 	}
 	
 	public void alterarProduto(ActionEvent evento) {
 		produtos = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
+	}
+	
+	public void removerProduto(ActionEvent evento){
+		try {
+			produtos = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
+			daoProdutos.remover(produtos.getIdproduto());
+			listaProdutos = daoProdutos.listar("nomeproduto");
+			
+			JSFUtil.mensagemSucesso("Produto Excluido com Sucesso!");
+			
+		} catch (Exception e) {
+			JSFUtil.mensagemErro("FATAL ERRO: " + e.getMessage());
+		}
 	}
 
 }

@@ -37,13 +37,40 @@
 					filterBy="#{produto.categoria.descricao}">
 					<h:outputText value="#{produto.categoria.descricao}" />
 				</p:column>
-
+				
 
 				<p:column headerText="Valor Unitário"
 					sortBy="#{produto.valorunitario}">
 					<h:outputText value="#{produto.valorunitario}" />
 				</p:column>
 
+
+<!-- 				botao editar -->
+				<p:column headerText="Op��es">
+					<p:commandButton icon="ui-icon-pencil" title="Editar Produto"
+						actionListener="#{beanProdutos.alterarProduto}"
+						update=":formNovoProduto:panelNovoProduto"
+						onclick="PF('dlgNovoProduto').show();">
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+					</p:commandButton>
+					
+<!-- 					Botao deletar -->
+					<p:commandButton icon="ui-icon-trash" title="Deletar Produto"
+						actionListener="#{beanProdutos.removerProduto}"
+						update=":formProdutosT:tabelaProdutos :mensagemGlobal">
+						<p:confirm header="Confirma��o de Remo��o"
+							message="Deseja Excluir o Produto '#{produto.nomeproduto}'?"
+							icon="ui-icon-alert" />
+						<f:attribute name="produtoSelecionado" value="#{produto}" />
+					</p:commandButton>
+					
+					<p:commandButton value="Estoque">
+					
+					</p:commandButton>
+
+				</p:column>
+
+>>>>>>> fb8df3353c807503d509eb5814567a940ec11d84
 				<f:facet name="footer">
 					<p:commandButton value="Novo Produto"
 						actionListener="#{beanProdutos.preparaNovoProduto}"
@@ -51,7 +78,16 @@
 					<p:commandButton value="Estoque" onclick="PF('dlgEstoque').show();"
 						update=":formNovoProduto:panelNovoProduto" />
 				</f:facet>
+
 			</p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="N�o" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
 		</h:form>
 		<p:dialog header="Novo Produto" widgetVar="dlgNovoProduto"
 			modal="true" closable="false" draggable="false" resizable="false"
