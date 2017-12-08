@@ -10,6 +10,7 @@
 	<ui:define name="menu_superior">
 		<ui:include src="/includes/menu_superior.xhtml" />
 	</ui:define>
+
 	<ui:define name="menu_esquerdo">
 		<ui:include src="/includes/menu_esquerdo.xhtml" />
 	</ui:define>
@@ -20,11 +21,11 @@
 			<p:dataTable var="cliente" value="#{beanClientes.listaClientes}"
 				rows="25" paginator="true">
 				<f:facet name="header">
-            		Clientes
+            		Selecione o cliente
         		</f:facet>
 				<p:column headerText="Código do Cliente"
 					sortBy="#{cliente.idcliente}">
-					<h:outputText value="#{cliente.idcliente}" />
+					<h:outputText value="#{cliente.idcliente}" onclick="PF('dlgNovoCliente').show();"/>
 				</p:column>
 
 				<p:column headerText="Nome" sortBy="#{cliente.nomecliente}"
@@ -54,32 +55,5 @@
 				</f:facet>
 			</p:dataTable>
 		</h:form>
-		<p:dialog header="Novo Cliente" widgetVar="dlgNovoCliente"
-			modal="true" closable="false" draggable="false" resizable="false"
-			appendTo="@(body)">
-			<h:form id="formNovoCliente">
-				<h:panelGrid id="panelNovoCliente" columns="2">
-
-					<p:outputLabel value="Nome Completo: " />
-					<p:inputText value="#{beanClientes.clientes.nomecliente}" />
-
-					<p:outputLabel value="CPF: " />
-					<p:inputText value="#{beanClientes.clientes.cpf}" />
-
-					<p:outputLabel value="Data de Nascimento: " />
-					<p:inputText value="#{beanClientes.clientes.dtnasc}"/>
-
-					<p:outputLabel value="Telefone: " />
-					<p:inputText value="#{beanClientes.clientes.telefone}" />
-
-				</h:panelGrid>
-				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" />
-					<p:commandButton value="Cancelar"
-						onclick="PF('dlgNovoCliente').hide();" />
-				</h:panelGrid>
-			</h:form>
-		</p:dialog>
 	</ui:define>
-
 </ui:composition>

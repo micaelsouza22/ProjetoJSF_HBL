@@ -25,7 +25,7 @@ public class LoginBean {
 	public void autenticar() {
 		try{
 			UsuarioDao usuarioDao = new UsuarioDao();
-			usuarioDao.autenticar(usuarioLogado.getCpf(), usuarioLogado.getSenha());
+			usuarioDao.autenticar(usuarioLogado.getNome(), usuarioLogado.getSenha());
 			if(usuarioLogado == null) {
 				
 			}

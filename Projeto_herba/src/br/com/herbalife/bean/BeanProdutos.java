@@ -6,11 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import br.com.herbalife.dao.CategoriaDao;
 import br.com.herbalife.dao.ProdutoDao;
 import br.com.herbalife.entidades.Categoria;
 import br.com.herbalife.entidades.Produto;
+import br.com.herbalife.util.JSFUtil;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -75,9 +77,14 @@ public class BeanProdutos implements Serializable {
 			daoProdutos.salvar(produtos);
 			listaProdutos = daoProdutos.listar("nomeproduto");
 			
+			JSFUtil.mensagemSucesso("Produto salvo com sucesso!");
 		} catch (Exception e) {
-			e.getMessage();
+			JSFUtil.mensagemErro("ERRO: " + e.getMessage());
 		}
+	}
+	
+	public void alterarProduto(ActionEvent evento) {
+		produtos = (Produto) evento.getComponent().getAttributes().get("produtoSelecionado");
 	}
 
 }

@@ -14,10 +14,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idusuario;
-
-	private String cpf;
 
 	private String nome;
 
@@ -32,14 +29,6 @@ public class Usuario implements Serializable {
 
 	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
-	}
-
-	public String getCpf() {
-		return this.cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
 	}
 
 	public String getNome() {
