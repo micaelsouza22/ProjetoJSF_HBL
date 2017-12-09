@@ -16,6 +16,8 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="idcliente", unique=true, nullable=false)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer idcliente;
 
 	private String cidade;
@@ -35,6 +37,11 @@ public class Cliente implements Serializable {
 
 	private String telefone;
 
+	//bi-directional many-to-one association to Estado
+	@ManyToOne
+	@JoinColumn(name="idestado")
+	private Estado estado;
+
 	//bi-directional many-to-one association to Dadosacompanhamento
 	@OneToMany(mappedBy="cliente")
 	private List<Dadosacompanhamento> dadosacompanhamentos;
@@ -42,11 +49,6 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to Pedido
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos;
-
-	//bi-directional many-to-one association to Estado
-	@ManyToOne
-	@JoinColumn(name="idestado")
-	private Estado estado;
 
 	public Cliente() {
 	}
@@ -123,6 +125,14 @@ public class Cliente implements Serializable {
 		this.telefone = telefone;
 	}
 
+	public Estado getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
 	public List<Dadosacompanhamento> getDadosacompanhamentos() {
 		return this.dadosacompanhamentos;
 	}
@@ -165,14 +175,6 @@ public class Cliente implements Serializable {
 		pedido.setCliente(null);
 
 		return pedido;
-	}
-
-	public Estado getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
 	}
 
 }
