@@ -17,7 +17,7 @@
 	<ui:define name="conteudo">
 
 		<h:form>
-			<p:dataTable var="cliente" value="#{beanClientes.listaClientes}"
+			<p:dataTable emptyMessage="Nenhum cliente encontrado." var="cliente" value="#{beanClientes.listaClientes}"
 				rows="25" paginator="true">
 				<f:facet name="header">
             		Clientes

@@ -36,7 +36,7 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to Estado
 	@ManyToOne
 	@JoinColumn(name="idestado")
-	private Estado descricao;
+	private Estado idestado;
 
 	private String telefone;
 
@@ -47,11 +47,6 @@ public class Cliente implements Serializable {
 	//bi-directional many-to-one association to Pedido
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos;
-
-	//bi-directional many-to-one association to Estado
-	@ManyToOne
-	@JoinColumn(name="idestado")
-	private Estado estado;
 
 	public Cliente() {
 	}
@@ -124,14 +119,6 @@ public class Cliente implements Serializable {
 		return this.telefone;
 	}
 
-	public Estado getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 
@@ -180,13 +167,12 @@ public class Cliente implements Serializable {
 
 		return pedido;
 	}
-
-	public Estado getDescricao() {
-		return this.descricao;
+	
+	public Estado getIdestado() {
+		return idestado;
 	}
 
-	public void setDescricao(Estado descricao) {
-		this.descricao = descricao;
+	public void setIdestado(Estado idestado) {
+		this.idestado = idestado;
 	}
-
 }

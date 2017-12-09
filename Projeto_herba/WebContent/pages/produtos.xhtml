@@ -18,7 +18,8 @@
 	<ui:define name="conteudo">
 
 		<h:form id="formProdutosT">
-			<p:dataTable id="tabelaProdutos" var="produto"
+			<p:dataTable emptyMessage="Nenhum produto encontrado."
+				id="tabelaProdutos" var="produto"
 				value="#{beanProdutos.listaProdutos}" rows="20" paginator="true">
 				<f:facet name="header">
             		Produtos
@@ -37,7 +38,7 @@
 					filterBy="#{produto.categoria.descricao}">
 					<h:outputText value="#{produto.categoria.descricao}" />
 				</p:column>
-				
+
 
 				<p:column headerText="Valor Unitário"
 					sortBy="#{produto.valorunitario}">
@@ -45,16 +46,16 @@
 				</p:column>
 
 
-<!-- 				botao editar -->
-				<p:column headerText="Op��es">
+				<!-- 				botao editar -->
+				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-pencil" title="Editar Produto"
 						actionListener="#{beanProdutos.alterarProduto}"
 						update=":formNovoProduto:panelNovoProduto"
 						onclick="PF('dlgNovoProduto').show();">
 						<f:attribute name="produtoSelecionado" value="#{produto}" />
 					</p:commandButton>
-					
-<!-- 					Botao deletar -->
+
+					<!-- 					Botao deletar -->
 					<p:commandButton icon="ui-icon-trash" title="Deletar Produto"
 						actionListener="#{beanProdutos.removerProduto}"
 						update=":formProdutosT:tabelaProdutos :mensagemGlobal">
@@ -63,14 +64,13 @@
 							icon="ui-icon-alert" />
 						<f:attribute name="produtoSelecionado" value="#{produto}" />
 					</p:commandButton>
-					
+
 					<p:commandButton value="Estoque">
-					
+
 					</p:commandButton>
 
 				</p:column>
 
->>>>>>> fb8df3353c807503d509eb5814567a940ec11d84
 				<f:facet name="footer">
 					<p:commandButton value="Novo Produto"
 						actionListener="#{beanProdutos.preparaNovoProduto}"
