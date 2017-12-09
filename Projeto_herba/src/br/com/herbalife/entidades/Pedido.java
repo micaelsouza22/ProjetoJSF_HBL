@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
+import java.math.BigDecimal;
 
 
 /**
@@ -12,7 +13,10 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
+@Table(name = "Pedido")
+@NamedQueries({
+	@NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
+})
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 

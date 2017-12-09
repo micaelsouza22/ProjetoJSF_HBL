@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateSistema.xhtml">
+
+	<ui:define name="menu_superior">
+		<ui:include src="/includes/menu_superior.xhtml" />
+	</ui:define>
+
+	<ui:define name="menu_esquerdo">
+		<ui:include src="/includes/menu_esquerdo.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="formFuncionarioT">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Funcionários" />
+				</f:facet>
+			</p:toolbar>
+			<h:panelGrid columns="4">
+				<p:outputLabel value="Nome: " />
+				<p:inputText maxlength="50" size="30" />
+				<p:commandButton value="Buscar" />
+			</h:panelGrid>
+
+			<p:dataTable id="tabelaFuncionarios"
+				emptyMessage="Não há funcionário(s) cadastrado(s).">
+				<p:column headerText="Código">
+				</p:column>
+
+				<p:column headerText="Nome">
+				</p:column>
+				<f:facet name="footer">
+					<p:commandButton value="CADASTRAR NOVO(A) FUNCIONÁRIO(A)"
+						oncomplete="PF('dlgNovoFuncionario').show();" />
+				</f:facet>
+			</p:dataTable>
+		</h:form>
+		<p:dialog header="Novo(a) Funcionário(a)"
+			widgetVar="dlgNovoFuncionario" modal="true" closable="false"
+			draggable="false" resizable="false" appendTo="@(body)">
+			<h:form id="formNovoFuncionario">
+				<h:panelGrid id="panelNovoFuncionario" columns="2">
+					<p:outputLabel value="Código: " />
+					<p:inputText readonly="true" size="10" value="#{usuarioBean.usuarioCadastro.idusuario}" />
+
+					<p:outputLabel value="Nome: " />
+					<p:inputText maxlength="50" size="30" value="#{usuarioBean.usuarioCadastro.nome}"/>
+
+					<p:outputLabel value="Senha: "/>
+					<p:password maxlength="8" size="10" value="#{usuarioBean.usuarioCadastro.senha}"/>
+					
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvarUsuario}"
+						oncomplete="PF('dlgNovoFuncionario').hide();"
+						update=":formFuncionarioT:tabelaFuncionarios :mensagemGlobal" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('dlgNovoFuncionario').hide();" />
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>

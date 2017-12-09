@@ -42,6 +42,9 @@ public class BeanProdutos implements Serializable {
 	}
 
 	public Produto getProdutos() {
+		if(produtos == null) {
+			produtos = new Produto();
+		}
 		return produtos;
 	}
 
@@ -83,11 +86,11 @@ public class BeanProdutos implements Serializable {
 			
 			daoProdutos.salvar(produtos);
 			listaProdutos = daoProdutos.listar("nomeproduto");
-			
+			JSFUtil.mensagemSucesso("Produto salvo com sucesso!");
+		} catch (Exception e) {
+			JSFUtil.mensagemErro("ERRO: " + e.getMessage());
 			JSFUtil.mensagemSucesso("Produto Salvo com Sucesso!");
 			
-		} catch (Exception e) {
-			JSFUtil.mensagemErro("FATAL ERRO: " + e.getMessage());
 		}
 	}
 	
