@@ -16,6 +16,8 @@ public class Usuario implements Serializable {
 	@Id
 	private Integer idusuario;
 
+	private String cpf;
+
 	private String nome;
 
 	private String senha;
@@ -29,6 +31,14 @@ public class Usuario implements Serializable {
 
 	public void setIdusuario(Integer idusuario) {
 		this.idusuario = idusuario;
+	}
+
+	public String getCpf() {
+		return this.cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getNome() {

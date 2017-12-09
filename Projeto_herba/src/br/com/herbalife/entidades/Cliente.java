@@ -35,11 +35,6 @@ public class Cliente implements Serializable {
 
 	private Integer numero;
 
-	//bi-directional many-to-one association to Estado
-	@ManyToOne
-	@JoinColumn(name="idestado")
-	private Estado idestado;
-
 	private String telefone;
 
 	//bi-directional many-to-one association to Estado
@@ -128,7 +123,6 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-
 	}
 
 	public Estado getEstado() {
@@ -181,14 +175,6 @@ public class Cliente implements Serializable {
 		pedido.setCliente(null);
 
 		return pedido;
-	}
-
-	public Estado getIdestado() {
-		return idestado;
-	}
-
-	public void setIdestado(Estado idestado) {
-		this.idestado = idestado;
 	}
 
 }

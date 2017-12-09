@@ -6,11 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import br.com.herbalife.dao.ClienteDao;
 import br.com.herbalife.dao.EstadoDao;
 import br.com.herbalife.entidades.Cliente;
 import br.com.herbalife.entidades.Estado;
+import br.com.herbalife.util.JSFUtil;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -86,9 +88,35 @@ public class BeanCliente implements Serializable{
 			
 			daoCliente.salvar(cliente);
 			listaCliente = daoCliente.listar("nomecliente");
+			JSFUtil.mensagemSucesso("Cliente Salvo com Sucesso!");
 			
 		} catch (Exception e) {
-			e.getMessage();
+			JSFUtil.mensagemSucesso("FATAL ERRO: " + e.getMessage());
+		}
+	}
+	
+	public void alterarCliente(ActionEvent evento) {
+		
+		try {
+			
+			cliente = (Cliente) evento.getComponent().getAttributes().get("clienteSelecionado");
+			JSFUtil.mensagemSucesso("Cliente Editado com Sucesso!");
+		} catch (Exception e) {
+			JSFUtil.mensagemSucesso("FATAL ERRO: " + e.getMessage());
+		}
+		
+	}
+	
+	public void removerCliente(ActionEvent evento) {
+		try {
+			
+			cliente = (Cliente) evento.getComponent().getAttributes().get("clienteSelecionado");
+			daoCliente.remover(cliente.getIdcliente());
+			JSFUtil.mensagemSucesso("Cliente Removido com Sucesso!");
+			listaCliente = daoCliente.listar("nomecliente");
+			
+		} catch (Exception e) {
+			JSFUtil.mensagemSucesso("FATAL ERRO: " + e.getMessage());
 		}
 	}
 	

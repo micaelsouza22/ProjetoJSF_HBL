@@ -19,6 +19,10 @@ public class Estado implements Serializable {
 
 	private String descricao;
 
+	//bi-directional many-to-one association to Cliente
+	@OneToMany(mappedBy="estado")
+	private List<Cliente> clientes;
+
 	public Estado() {
 	}
 
@@ -38,5 +42,26 @@ public class Estado implements Serializable {
 		this.descricao = descricao;
 	}
 
+	public List<Cliente> getClientes() {
+		return this.clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+	public Cliente addCliente(Cliente cliente) {
+		getClientes().add(cliente);
+		cliente.setEstado(this);
+
+		return cliente;
+	}
+
+	public Cliente removeCliente(Cliente cliente) {
+		getClientes().remove(cliente);
+		cliente.setEstado(null);
+
+		return cliente;
+	}
 
 }
