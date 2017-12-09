@@ -12,19 +12,10 @@
 		<h:outputStylesheet library="css" name="estilo.css" />
 	</h:head>
 	<h:body>
-
-		<p:growl id="mensagemGlobal" sticky="true"/>
-
+	
+		<p:growl id="mensagemGlobal" life="8000"/>
+	
 		<p:layout fullPage="true" >
-
-			<p:layoutUnit position="north" header="Sistema de Gerenciamento - Espaço Vida Saudável Herbalife">
-				<ui:insert name="menu_superior" />
-			</p:layoutUnit>
-
-			<p:layoutUnit position="west" size="208" header="Menu"
-				resizable="false" closable="false" collapsible="true">
-				<ui:insert name="menu_esquerdo" />
-			</p:layoutUnit>
 
 			<p:layoutUnit position="center">
 				<ui:insert name="conteudo" />
@@ -32,7 +23,7 @@
 
 			<p:layoutUnit position="south" size="75">
 				<h:outputText
-					value="Desenvolvido por Jorge Cavalcante e Micael Souza." />
+					value="© Copyright 2017-2017 Espaço Vida Saudável Herbalife." />
 			</p:layoutUnit>
 
 		</p:layout>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -18,12 +18,13 @@
 	<ui:define name="conteudo">
 
 		<h:form id="formProdutosT">
-			<p:dataTable id="tabelaProdutos" var="produto"
+			<p:dataTable emptyMessage="Nenhum produto encontrado."
+				id="tabelaProdutos" var="produto"
 				value="#{beanProdutos.listaProdutos}" rows="20" paginator="true">
 				<f:facet name="header">
             		Produtos
         		</f:facet>
-				<p:column headerText="Código de Barras"
+				<p:column headerText="CÃ³digo de Barras"
 					sortBy="#{produto.codbarras}">
 					<h:outputText value="#{produto.codbarras}" />
 				</p:column>
@@ -37,34 +38,35 @@
 					filterBy="#{produto.categoria.descricao}">
 					<h:outputText value="#{produto.categoria.descricao}" />
 				</p:column>
-				
 
-				<p:column headerText="Valor Unitário"
+
+				<p:column headerText="Valor UnitÃ¡rio"
 					sortBy="#{produto.valorunitario}">
 					<h:outputText value="#{produto.valorunitario}" />
 				</p:column>
 
-<!-- 				botao editar -->
-				<p:column headerText="Opções">
+
+				<!-- 				botao editar -->
+				<p:column headerText="OpÃ§Ãµes">
 					<p:commandButton icon="ui-icon-pencil" title="Editar Produto"
 						actionListener="#{beanProdutos.alterarProduto}"
 						update=":formNovoProduto:panelNovoProduto"
 						onclick="PF('dlgNovoProduto').show();">
 						<f:attribute name="produtoSelecionado" value="#{produto}" />
 					</p:commandButton>
-					
-<!-- 					Botao deletar -->
+
+					<!-- 					Botao deletar -->
 					<p:commandButton icon="ui-icon-trash" title="Deletar Produto"
 						actionListener="#{beanProdutos.removerProduto}"
 						update=":formProdutosT:tabelaProdutos :mensagemGlobal">
-						<p:confirm header="Confirmação de Remoção"
+						<p:confirm header="Confirmaï¿½ï¿½o de Remoï¿½ï¿½o"
 							message="Deseja Excluir o Produto '#{produto.nomeproduto}'?"
 							icon="ui-icon-alert" />
 						<f:attribute name="produtoSelecionado" value="#{produto}" />
 					</p:commandButton>
-					
+
 					<p:commandButton value="Estoque">
-					
+
 					</p:commandButton>
 
 				</p:column>
@@ -82,7 +84,7 @@
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 				<p:commandButton value="Sim" type="button"
 					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="Não" type="button"
+				<p:commandButton value="Nï¿½o" type="button"
 					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>
 
@@ -92,7 +94,7 @@
 			appendTo="@(body)">
 			<h:form id="formNovoProduto">
 				<h:panelGrid id="panelNovoProduto" columns="2">
-					<p:outputLabel value="Código de barras: " />
+					<p:outputLabel value="CÃ³digo de barras: " />
 					<p:inputText value="#{beanProdutos.produtos.codbarras}" />
 
 					<p:outputLabel value="Nome do produto: " />
@@ -103,7 +105,7 @@
 					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}"
 						converter="omnifaces.SelectItemsConverter" filter="true"
 						styleClass="inputs">
-						<f:selectItem itemLabel="Selecione.." itemValue=""
+						<f:selectItem itemLabel="Selecione..." itemValue=""
 							noSelectionOption="true" />
 						<f:selectItems value="#{beanProdutos.listaCategorias}"
 							var="categoria" itemLabel="#{categoria.descricao}"
@@ -111,7 +113,7 @@
 					</p:selectOneMenu>
 
 
-					<p:outputLabel value="Valor unitário: " />
+					<p:outputLabel value="Valor unitÃ¡rio: " />
 					<p:inputText value="#{beanProdutos.produtos.valorunitario}" />
 
 
