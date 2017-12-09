@@ -22,11 +22,11 @@
 					icon="ui-icon-person" />
 				<p:menuitem value="Produto" outcome="/pages/produtos.xhtml"
 					icon="ui-icon-circle-plus" />
-				<p:menuitem value="Categoria de Produto" outcome="/pages/categorias.xhtml"
+				<p:menuitem value="Categorias de Produtos" outcome="/pages/categorias.xhtml"
 					actionListener="#{menuView.update}" icon="ui-icon-flag" />
 			</p:submenu>
 			<p:submenu label="Vendas">
-				<p:menuitem value="Realizar Venda"
+				<p:menuitem value="Realizar Venda" outcome="/pages/venda.xhtml"
 					actionListener="#{menuView.delete}" ajax="false"
 					icon="ui-icon-cart" />
 				<p:menuitem value="Histórico de Vendas"

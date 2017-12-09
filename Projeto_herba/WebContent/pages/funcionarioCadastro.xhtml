@@ -47,13 +47,13 @@
 			<h:form id="formNovoFuncionario">
 				<h:panelGrid id="panelNovoFuncionario" columns="2">
 					<p:outputLabel value="Código: " />
-					<p:inputText readonly="true" size="10" />
+					<p:inputText readonly="true" size="10" value="#{usuarioBean.usuarioCadastro.idusuario}" />
 
 					<p:outputLabel value="Nome: " />
-					<p:inputText />
+					<p:inputText maxlength="50" size="30" value="#{usuarioBean.usuarioCadastro.nome}"/>
 
 					<p:outputLabel value="Senha: "/>
-					<p:password maxlength="8" size="10" />
+					<p:password maxlength="8" size="10" value="#{usuarioBean.usuarioCadastro.senha}"/>
 					
 				</h:panelGrid>
 				<h:panelGrid columns="2">

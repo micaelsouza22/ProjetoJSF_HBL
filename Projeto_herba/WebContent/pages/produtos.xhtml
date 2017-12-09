@@ -105,7 +105,7 @@
 					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}"
 						converter="omnifaces.SelectItemsConverter" filter="true"
 						styleClass="inputs">
-						<f:selectItem itemLabel="Selecione.." itemValue=""
+						<f:selectItem itemLabel="Selecione..." itemValue=""
 							noSelectionOption="true" />
 						<f:selectItems value="#{beanProdutos.listaCategorias}"
 							var="categoria" itemLabel="#{categoria.descricao}"
@@ -122,7 +122,7 @@
 					<p:commandButton value="Salvar"
 						actionListener="#{beanProdutos.salvarProduto}"
 						oncomplete="PF('dlgNovoProduto').hide();"
-						update=":formProdutosT :tabelaProdutos :mensagemGlobal" />
+						update=":formProdutosT:tabelaProdutos :mensagemGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('dlgNovoProduto').hide();" />
 				</h:panelGrid>

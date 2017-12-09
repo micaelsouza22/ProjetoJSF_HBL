@@ -30,6 +30,9 @@ public class BeanClientes implements Serializable{
 	}
 
 	public Cliente getClientes() {
+		if(clientes == null) {
+			clientes = new Cliente();
+		}
 		return clientes;
 	}
 

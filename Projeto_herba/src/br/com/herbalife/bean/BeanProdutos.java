@@ -42,6 +42,9 @@ public class BeanProdutos implements Serializable {
 	}
 
 	public Produto getProdutos() {
+		if(produtos == null) {
+			produtos = new Produto();
+		}
 		return produtos;
 	}
 

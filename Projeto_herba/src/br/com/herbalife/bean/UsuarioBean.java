@@ -1,7 +1,6 @@
 package br.com.herbalife.bean;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import br.com.herbalife.dao.UsuarioDao;
@@ -12,7 +11,19 @@ import br.com.herbalife.util.JSFUtil;
 @ViewScoped
 public class UsuarioBean {
 	private Usuario usuarioLogado;
+	private Usuario usuarioCadastro;
 	
+	public Usuario getUsuarioCadastro() {
+		if(usuarioCadastro == null) {
+			usuarioCadastro = new Usuario();
+		}
+		return usuarioCadastro;
+	}
+
+	public void setUsuarioCadastro(Usuario usuarioCadastro) {
+		this.usuarioCadastro = usuarioCadastro;
+	}
+
 	public Usuario getUsuarioLogado() {
 		if(usuarioLogado == null) {
 			usuarioLogado = new Usuario();

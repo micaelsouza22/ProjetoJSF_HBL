@@ -47,10 +47,10 @@
 			<h:form id="formNovaCategoria">
 				<h:panelGrid id="panelNovaCategoria" columns="2">
 					<p:outputLabel value="Código: " />
-					<p:inputText readonly="true" />
+					<p:inputText size="10" readonly="true" value="#{categoriaBean.categoriaCadastro.idcategoria}" />
 
-					<p:outputLabel value="Descrição: " />
-					<p:inputText />
+					<p:outputLabel value="Descrição: "  />
+					<p:inputText maxlength="40" size="30" value="#{categoriaBean.categoriaCadastro.descricao}"/>
 
 				</h:panelGrid>
 				<h:panelGrid columns="2">
