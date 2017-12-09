@@ -55,6 +55,7 @@
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar"
+						actionListener="#{categoriaBean.salvarCategoria}"
 						oncomplete="PF('dlgNovaCategoria').hide();"
 						update=":formCategoriaT:tabelaCategorias :mensagemGlobal" />
 					<p:commandButton value="Cancelar"

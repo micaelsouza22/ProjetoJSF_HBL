@@ -2,13 +2,15 @@ package br.com.herbalife.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import br.com.herbalife.dao.UsuarioDao;
 import br.com.herbalife.entidades.Usuario;
+import br.com.herbalife.util.JSFUtil;
 
 @ManagedBean
-@SessionScoped
-public class LoginBean {
+@ViewScoped
+public class UsuarioBean {
 	private Usuario usuarioLogado;
 	
 	public Usuario getUsuarioLogado() {
@@ -32,5 +34,8 @@ public class LoginBean {
 		}catch (RuntimeException ex) {
 	
 		}
+	}
+	public void salvarUsuario() {
+		JSFUtil.mensagemSucesso("Funcionário cadastrado com sucesso!");
 	}
 }

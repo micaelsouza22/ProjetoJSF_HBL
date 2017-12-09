@@ -16,9 +16,10 @@
 
 	<ui:define name="conteudo">
 
-		<h:form>
-			<p:dataTable emptyMessage="Nenhum cliente encontrado." var="cliente" value="#{beanClientes.listaClientes}"
-				rows="25" paginator="true">
+		<h:form id="formClientes">
+			<p:dataTable emptyMessage="Nenhum cliente encontrado."
+				id="tabelaClientes" var="cliente"
+				value="#{beanClientes.listaClientes}" rows="25" paginator="true">
 				<f:facet name="header">
             		Clientes
         		</f:facet>
@@ -64,17 +65,19 @@
 					<p:inputText value="#{beanClientes.clientes.nomecliente}" />
 
 					<p:outputLabel value="CPF: " />
-					<p:inputText value="#{beanClientes.clientes.cpf}" />
+					<p:inputMask mask="999.999.999-99" value="#{beanClientes.clientes.cpf}" />
 
 					<p:outputLabel value="Data de Nascimento: " />
-					<p:inputText value="#{beanClientes.clientes.dtnasc}"/>
+					<p:inputText value="#{beanClientes.clientes.dtnasc}" />
 
 					<p:outputLabel value="Telefone: " />
 					<p:inputText value="#{beanClientes.clientes.telefone}" />
 
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" />
+					<p:commandButton value="Salvar"
+						actionListener="#{beanClientes.salvarCliente}"
+						update=":formClientes:tabelaClientes :mensagemGlobal" />
 					<p:commandButton value="Cancelar"
 						onclick="PF('dlgNovoCliente').hide();" />
 				</h:panelGrid>

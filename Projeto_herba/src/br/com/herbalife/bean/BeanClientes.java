@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.herbalife.dao.ClienteDao;
 import br.com.herbalife.entidades.Cliente;
+import br.com.herbalife.util.JSFUtil;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -40,5 +41,7 @@ public class BeanClientes implements Serializable{
 	public void carregaDadosTabela(){
 		listaClientes = daoClientes.listar("idcliente");
 	}
-	
+	public void salvarCliente() {
+		JSFUtil.mensagemSucesso("Cliente salvo com sucesso!");
+	}
 }
