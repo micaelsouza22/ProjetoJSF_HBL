@@ -102,7 +102,8 @@ public class BeanProdutos implements Serializable {
 			JSFUtil.mensagemSucesso("Produto Excluido com Sucesso!");
 			
 		} catch (Exception e) {
-			JSFUtil.mensagemErro("FATAL ERRO: " + e.getMessage());
+			JSFUtil.mensagemErro("FATAL ERRO: 'O Produto Ainda contem Estoque'"
+					+ "Por isso Não pode Ser Excluso");
 		}
 	}
 
