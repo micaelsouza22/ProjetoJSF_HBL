@@ -65,5 +65,47 @@
 				</f:facet>
 			</p:dataTable>
 		</h:form>
+		
+		<p:dialog header="Nova Venda" widgetVar="dlgNovaVenda"
+			modal="true" closable="false" draggable="false" resizable="false"
+			appendTo="@(body)">
+			<h:form id="formNovaVenda">
+				<h:panelGrid id="panelNovaVenda" columns="2">
+					<p:outputLabel value="Código de barras: " />
+					<p:inputText value="#{beanProdutos.produtos.codbarras}" />
+
+					<p:outputLabel value="Nome do produto: " />
+					<p:inputText value="#{beanProdutos.produtos.nomeproduto}" />
+
+					<p:outputLabel value="Categoria: " />
+
+					<p:selectOneMenu value="#{beanProdutos.produtos.categoria}"
+						converter="omnifaces.SelectItemsConverter" filter="true"
+						styleClass="inputs">
+						<f:selectItem itemLabel="Selecione.." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanProdutos.listaCategorias}"
+							var="categoria" itemLabel="#{categoria.descricao}"
+							itemValue="#{categoria}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="Valor unitário: " />
+					<p:inputText value="#{beanProdutos.produtos.valorunitario}" />
+
+
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{beanProdutos.salvarProduto}"
+						oncomplete="PF('dlgNovoProduto').hide();"
+						update=":formProdutosT:tabelaProdutos :mensagemGlobal" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('dlgNovoProduto').hide();" />
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+		
 	</ui:define>
 </ui:composition>
