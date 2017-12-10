@@ -23,7 +23,6 @@ public class BeanProdutos implements Serializable {
 
 	private List<Produto> listaProdutos;
 	private List<Categoria> listaCategorias;
-	private List<Estoque> listaEstoque;
 	private ProdutoDao daoProdutos;
 	private CategoriaDao daoCategoria;
 	private Produto produtos;
@@ -71,7 +70,6 @@ public class BeanProdutos implements Serializable {
 			
 			produtos = new Produto();
 			listaCategorias = daoCategoria.listar(null);
-			listaEstoque = daoestoque.listar(null);
 			
 		} catch (Exception e) {
 			e.getMessage();

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateSistema.xhtml">
+
+	<ui:define name="menu_superior">
+		<ui:include src="/includes/menu_superior.xhtml" />
+	</ui:define>
+
+	<ui:define name="menu_esquerdo">
+		<ui:include src="/includes/menu_esquerdo.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formEstoque">
+			<p:dataTable id="tabelaEstoque" var="estoque"
+				value="#{beanTesteEstoque.listaEstoque}" rows="20" paginator="true">
+				<f:facet name="header">
+            		Produtos
+        		</f:facet>
+				<p:column headerText="Código de Barras"
+					sortBy="#{estoque.produto.codbarras}">
+					<h:outputText value="#{estoque.produto.codbarras}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{estoque.produto.nomeproduto}"
+					filterBy="#{estoque.produto.nomeproduto}">
+					<h:outputText value="#{estoque.produto.nomeproduto}" />
+				</p:column>
+
+				<p:column headerText="Categoria" sortBy="#{estoque.produto.categoria}"
+					filterBy="#{estoque.produto.categoria.descricao}">
+					<h:outputText value="#{estoque.produto.categoria.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade em Estoque"
+					sortBy="#{estoque.qtd}">
+					<h:outputText value="#{estoque.qtd}" />
+				</p:column>
+				
+				<p:column headerText="Data da Compra"
+					sortBy="#{estoque.dtcompra}" >
+					<h:outputText value="#{estoque.dtcompra}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>		
+				</p:column>				
+
+				<p:column headerText="Valor Unitário"
+					sortBy="#{estoque.produto.valorunitario}">
+					<h:outputText value="#{estoque.produto.valorunitario}" />
+				</p:column>
+
+
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo Estoque"
+						actionListener="#{beanTesteEstoque.preparaRgEstoque}"
+						oncomplete="PF('dlgRgEstoque').show();"
+						update=":formRgEstoque:panelRgEstoque" />
+				</f:facet>
+
+			</p:dataTable>
+
+
+
+		</h:form>
+		<p:dialog header="Registro de Estoque" widgetVar="dlgRgEstoque"
+			modal="true" closable="false" draggable="false" resizable="false"
+			appendTo="@(body)">
+			<h:form id="formRgEstoque">
+				<h:panelGrid id="panelRgEstoque" columns="2">
+				
+					<p:outputLabel value="Produto: " />
+
+					<p:selectOneMenu value="#{beanTesteEstoque.estoque.produto}" 
+					  converter="omnifaces.SelectItemsConverter" filter="true" styleClass="inputs">
+						<f:selectItem itemLabel="Selecione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanTesteEstoque.listProduto}"
+							var="produto" itemLabel="#{produto.nomeproduto}"
+							itemValue="#{produto}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Quantidade de Estoque: " />
+					<p:inputText value="#{beanTesteEstoque.estoque.qtd}" />
+					
+					<p:outputLabel value="Data da Compra: " />
+					<p:calendar id="mask" value="#{beanTesteEstoque.estoque.dtcompra}" pattern="dd-MM-yyyy" mask="true" />
+
+
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar"
+						actionListener="#{beanTesteEstoque.salvarRgEstoque}"
+						oncomplete="PF('dlgRgEstoque').hide();"
+						update=":formEstoque:tabelaEstoque" />
+					<p:commandButton value="Cancelar"
+						onclick="PF('dlgRgEstoque').hide();" />
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

@@ -15,6 +15,8 @@ public class Estoque implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="idestoque", unique=true, nullable=false)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)	
 	private Integer idestoque;
 
 	@Temporal(TemporalType.DATE)
