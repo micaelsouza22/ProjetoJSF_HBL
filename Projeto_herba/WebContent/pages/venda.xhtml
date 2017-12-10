@@ -18,36 +18,46 @@
 	<ui:define name="conteudo">
 
 		<h:form>
-			<p:dataTable var="cliente" value="#{beanClientes.listaClientes}"
+			<p:dataTable var="itemPedido" value="#{beanVendas.listaItemP}"
 				rows="25" paginator="true">
 				<f:facet name="header">
-            		Selecione o cliente
+            		Vendas
         		</f:facet>
+        		
+        		<p:column headerText="Numero do Pedido">
+					<h:outputText value="#{itemPedido.pedido.numeropedido}" />
+				</p:column>
+				
 				<p:column headerText="Código do Cliente"
-					sortBy="#{cliente.idcliente}">
-					<h:outputText value="#{cliente.idcliente}" onclick="PF('dlgNovoCliente').show();"/>
+					sortBy="#{itemPedido.pedido.cliente.idcliente}">
+					<h:outputText value="#{itemPedido.pedido.cliente.idcliente}"/>
 				</p:column>
 
-				<p:column headerText="Nome" sortBy="#{cliente.nomecliente}"
-					filterBy="#{cliente.nomecliente}">
-					<h:outputText value="#{cliente.nomecliente}" />
+				<p:column headerText="Nome do Cliente" sortBy="#{itemPedido.pedido.cliente.nomecliente}"
+					filterBy="#{itemPedido.pedido.cliente.nomecliente}">
+					<h:outputText value="#{itemPedido.pedido.cliente.nomecliente}" />
+				</p:column>
+				
+				<p:column headerText="Produto" sortBy="#{itemPedido.produto.nomeproduto}">
+					<h:outputText value="#{itemPedido.produto.nomeproduto}" />
+				</p:column>
+				
+				<p:column headerText="Valor" sortBy="#{itemPedido.valortotal}">
+					<h:outputText value="#{itemPedido.valortotal}" />
+				</p:column>
+				
+				<p:column headerText="Quantidade" sortBy="#{itemPedido.qtditem}">
+					<h:outputText value="#{itemPedido.qtditem}" />
 				</p:column>
 
-				<p:column headerText="CPF" filterBy="#{cliente.cpf}">
-					<h:outputText value="#{cliente.cpf}" />
+				<p:column headerText="Data de Venda" sortBy="#{itemPedido.pedido.datapedido}" filterBy="#{itemPedido.pedido.datapedido}">
+					<h:outputText value="#{itemPedido.pedido.datapedido}" />
 				</p:column>
 
-				<p:column headerText="Data de Nascimento" sortBy="#{cliente.dtnasc}">
-					<h:outputText value="#{cliente.dtnasc}" />
+				<p:column headerText="Tipo de Pagamento" sortBy="#{itemPedido.pedido.tipodepagmt.descricao}">
+					<h:outputText value="#{itemPedido.pedido.tipodepagmt.descricao}" />
 				</p:column>
 
-				<p:column headerText="Contato" sortBy="#{cliente.telefone}">
-					<h:outputText value="#{cliente.telefone}" />
-				</p:column>
-
-				<p:column headerText="Endereço">
-					<h:outputText value="#{cliente.endereco.rua}" />
-				</p:column>
 
 				<f:facet name="footer">
 					<p:commandButton value="Novo Cliente"
