@@ -15,6 +15,8 @@ public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="idestado", unique=true, nullable=false)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer idestado;
 
 	private String descricao;

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateSistema.xhtml">
+
+	<ui:define name="menu_superior">
+		<ui:include src="/includes/menu_superior.xhtml" />
+	</ui:define>
+	<ui:define name="menu_esquerdo">
+		<ui:include src="/includes/menu_esquerdo.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formTabelaAcomp">
+			<p:dataTable id="tabelaAcomp" var="acompanhamento" value="#{beanDadosAcompanhamento.listaDadosAcomp}"
+				rows="25" paginator="true">
+				<f:facet name="header">
+            		Dados de Acompanhamento
+        		</f:facet>
+				<p:column headerText="Nome do Cliente"
+					sortBy="#{acompanhamento.cliente.idcliente}" filterBy="#{acompanhamento.cliente.nomecliente}">
+					<h:outputText value="#{acompanhamento.cliente.nomecliente}" />
+				</p:column>
+				
+
+				<p:column headerText="Peso" sortBy="#{acompanhamento.peso}">
+					<h:outputText value="#{acompanhamento.peso}" />
+				</p:column>
+
+				<p:column headerText="Quadril" sortBy="acompanhamento.quadril">
+					<h:outputText value="#{acompanhamento.quadril}" />
+				</p:column>
+
+				<p:column headerText="Cintura" sortBy="#{acompanhamento.cintura}">
+					<h:outputText value="#{acompanhamento.cintura}">
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Idade Biologica" sortBy="#{acompanhamento.idadebiologica}">
+					<h:outputText value="#{acompanhamento.idadebiologica}" />
+				</p:column>
+
+				<p:column headerText="MetBasal">
+					<h:outputText value="#{acompanhamento.metbasal}" />
+				</p:column>
+				
+				<p:column headerText="Torax">
+					<h:outputText value="#{acompanhamento.torax}" />
+				</p:column>
+				
+				<p:column headerText="Musculo">
+					<h:outputText value="#{acompanhamento.musculo}" />
+				</p:column>
+				
+				<p:column headerText="Gordura">
+					<h:outputText value="#{acompanhamento.gordura}" />
+				</p:column>
+				
+				<p:column headerText="GorduraVisc">
+					<h:outputText value="#{acompanhamento.gorduravisc}" />
+				</p:column>
+				
+				<p:column headerText="IMC">
+					<h:outputText value="#{acompanhamento.imc}" />
+				</p:column>
+				
+				<p:column headerText="Data do Acompanhamento">
+					<h:outputText value="#{acompanhamento.dataacomp}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-pencil" title="Editar Acompanhamento"
+						actionListener="#{beanDadosAcompanhamento.alterarAcompanhamento}"
+						update=":formNovoAcomp:panelNovoAcomp :mensagemGlobal" onclick="PF('dlgNovoAcomp').show();">					
+						<f:attribute name="acompSelecionado" value="#{acompanhamento}" />
+											
+					</p:commandButton>
+					
+					<p:commandButton icon="ui-icon-trash" title="Revover Acompanhamento"
+						actionListener="#{beanDadosAcompanhamento.removerDadoAcompanhamento}"
+						update=":formTabelaAcomp:tabelaAcomp :mensagemGlobal">	
+						<p:confirm header="Confirmação de Remoção"
+							message="Deseja Excluir o Acompanhmaneto do Cliente '#{acompanhamento.cliente.nomecliente}'?"
+							icon="ui-icon-alert" />				
+						<f:attribute name="acompSelecionado" value="#{acompanhamento}" />
+											
+					</p:commandButton>
+				</p:column>
+
+				<f:facet name="footer">
+					<p:commandButton value="Novo Acompanhamento" actionListener="#{beanDadosAcompanhamento.preparaNovoAcompanhamento}"
+						oncomplete="PF('dlgNovoAcomp').show();" update=":formNovoAcomp:panelNovoAcomp"/>
+				</f:facet>
+				
+			</p:dataTable>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
+
+		</h:form>
+		
+		
+		<p:dialog header="Novo Acompanhamento" widgetVar="dlgNovoAcomp"
+			modal="true" closable="false" draggable="false" resizable="false"
+			appendTo="@(body)">
+			<h:form id="formNovoAcomp">
+				<h:panelGrid id="panelNovoAcomp" columns="4">
+
+
+					<p:outputLabel value="Nome do Cliente: " />
+					<p:selectOneMenu
+						value="#{beanDadosAcompanhamento.dadosAcomp.cliente}"
+						converter="omnifaces.SelectItemsConverter" filter="true"
+						styleClass="inputs">
+						<f:selectItem itemLabel="Selecione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanDadosAcompanhamento.listaCliente}"
+							var="cliente" itemLabel="#{cliente.nomecliente}"
+							itemValue="#{cliente}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Peso: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.peso}" />
+
+					<p:outputLabel value="Quadril: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.quadril}" />
+
+					<p:outputLabel value="Cintura: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.cintura}" />
+
+					<p:outputLabel value="Idade Biologica: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.idadebiologica}" />
+
+					<p:outputLabel value="MetBasal: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.metbasal}" />
+
+					<p:outputLabel value="Torax: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.torax}" />
+
+					<p:outputLabel value="Musculo: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.musculo}" />
+
+					<p:outputLabel value="Gordura: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.gordura}" />
+
+					<p:outputLabel value="GorduraVisc: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.gorduravisc}" />
+
+					<p:outputLabel value="IMC: " />
+					<p:inputText value="#{beanDadosAcompanhamento.dadosAcomp.imc}" />
+
+					<p:outputLabel value="Data do Acompanhamaneto: " />
+					<p:calendar id="mask" value="#{beanDadosAcompanhamento.dadosAcomp.dataacomp}"
+						pattern="dd-MM-yyyy" mask="true" />
+
+
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" actionListener="#{beanDadosAcompanhamento.salvarAcompanhamento()}" oncomplete="PF('dlgNovoAcomp').hide();"
+							update=":formTabelaAcomp:tabelaAcomp"/>
+					<p:commandButton value="Cancelar"
+						onclick="PF('dlgNovoAcomp').hide();" />
+				</h:panelGrid>
+				
+				
+			</h:form>
+		</p:dialog>
+	</ui:define>
+
+</ui:composition>
