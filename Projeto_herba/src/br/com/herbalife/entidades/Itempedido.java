@@ -1,6 +1,8 @@
 package br.com.herbalife.entidades;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 
@@ -9,25 +11,30 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name = "itempedido")
 @NamedQuery(name="Itempedido.findAll", query="SELECT i FROM Itempedido i")
 public class Itempedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "iditem")
 	private Integer iditem;
-
+	
+	@Column(name = "qtditem", nullable = false)
 	private Integer qtditem;
-
-	private String valortotal;
+	
+	@Column(name = "valortotal", precision = 6, scale = 2, nullable = false)
+	private BigDecimal valortotal;
 
 	//bi-directional many-to-one association to Pedido
-	@ManyToOne
-	@JoinColumn(name="numeropedido")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="numeropedido", referencedColumnName = "numeropedido", nullable = false)
 	private Pedido pedido;
 
 	//bi-directional many-to-one association to Produto
-	@ManyToOne
-	@JoinColumn(name="idproduto")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="idproduto", referencedColumnName = "idproduto", nullable = false)
 	private Produto produto;
 
 	public Itempedido() {
@@ -49,11 +56,11 @@ public class Itempedido implements Serializable {
 		this.qtditem = qtditem;
 	}
 
-	public String getValortotal() {
-		return this.valortotal;
+	public BigDecimal getValortotal() {
+		return valortotal;
 	}
 
-	public void setValortotal(String valortotal) {
+	public void setValortotal(BigDecimal valortotal) {
 		this.valortotal = valortotal;
 	}
 
