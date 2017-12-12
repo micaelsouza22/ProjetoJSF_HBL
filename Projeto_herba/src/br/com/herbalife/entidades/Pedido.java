@@ -1,44 +1,80 @@
 package br.com.herbalife.entidades;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
-
 
 /**
  * The persistent class for the pedido database table.
  * 
  */
 @Entity
-@NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
+@Table(name = "pedido")
+@NamedQuery(name = "Pedido.findAll", query = "SELECT p FROM Pedido p")
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "numeropedido")
 	private Integer numeropedido;
 
-	@Temporal(TemporalType.DATE)
-	private Date datapedido;
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name = "horapedido", nullable = false)
+	private Date horapedido;
 
-	private Time horapedido;
+	@Column(name = "valortotalpedido", precision = 6, scale = 2, nullable = false)
+	private BigDecimal valortotalpedido;
 
-	private double valortotalpedido;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idusuario", referencedColumnName = "idusuario", nullable = false)
+	private Usuario usuario;
 
-	//bi-directional many-to-one association to Itempedido
-	@OneToMany(mappedBy="pedido")
+	// bi-directional many-to-one association to Itempedido
+	@OneToMany(mappedBy = "pedido")
 	private List<Itempedido> itempedidos;
 
-	//bi-directional many-to-one association to Cliente
-	@ManyToOne
-	@JoinColumn(name="idcliente")
+	// bi-directional many-to-one association to Cliente
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idcliente")
 	private Cliente cliente;
 
-	//bi-directional many-to-one association to Tipodepagmt
-	@ManyToOne
-	@JoinColumn(name="idtipopag")
+	// bi-directional many-to-one association to Tipodepagmt
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idtipopag")
 	private Tipodepagmt tipodepagmt;
+
+	public Date getHorapedido() {
+		return horapedido;
+	}
+
+	public void setHorapedido(Date horapedido) {
+		this.horapedido = horapedido;
+	}
+
+	public BigDecimal getValortotalpedido() {
+		return valortotalpedido;
+	}
+
+	public void setValortotalpedido(BigDecimal valortotalpedido) {
+		this.valortotalpedido = valortotalpedido;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Pedido() {
 	}
@@ -51,28 +87,8 @@ public class Pedido implements Serializable {
 		this.numeropedido = numeropedido;
 	}
 
-	public Date getDatapedido() {
-		return this.datapedido;
-	}
-
-	public void setDatapedido(Date datapedido) {
-		this.datapedido = datapedido;
-	}
-
-	public Time getHorapedido() {
-		return this.horapedido;
-	}
-
 	public void setHorapedido(Time horapedido) {
 		this.horapedido = horapedido;
-	}
-
-	public double getValortotalpedido() {
-		return this.valortotalpedido;
-	}
-
-	public void setValortotalpedido(double valortotalpedido) {
-		this.valortotalpedido = valortotalpedido;
 	}
 
 	public List<Itempedido> getItempedidos() {

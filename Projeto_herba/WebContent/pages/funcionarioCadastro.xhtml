@@ -17,47 +17,82 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formFuncionarioT">
-			<p:toolbar>
-				<f:facet name="left">
-					<h:outputText value="Funcionários" />
-				</f:facet>
-			</p:toolbar>
-			<h:panelGrid columns="4">
-				<p:outputLabel value="Nome: " />
-				<p:inputText maxlength="50" size="30" />
-				<p:commandButton value="Buscar" />
-			</h:panelGrid>
-
-			<p:dataTable id="tabelaFuncionarios"
+			<p:dataTable id="tabelaFuncionarios" var="funcionario" value="#{usuarioBean.listaUsuarios}"
 				emptyMessage="Não há funcionário(s) cadastrado(s).">
-				<p:column headerText="Código">
+				<f:facet name="header">
+            		FUNCIONÁRIOS
+        		</f:facet>
+				<p:column headerText="Código do Funcionário"
+					sortBy="#{funcionario.idusuario}">
+					<h:outputText value="#{funcionario.idusuario}" />
 				</p:column>
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" filterBy="#{funcionario.nome}" sortBy="#{funcionario.nome}">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+				<p:column headerText="CPF" filterBy="#{funcionario.cpf}">
+					<h:outputText value="#{funcionario.cpf}" />
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-pencil" title="Editar Funcionário"
+						actionListener="#{usuarioBean.alterarFuncionario}"
+						update=":formNovoFuncionario:panelNovoFuncionario :mensagemGlobal"
+						onclick="PF('dlgNovoFuncionario').show();">
+						<f:attribute name="funcionarioSelecionado" value="#{funcionario}" />
+
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-trash" title="Revover Cliente"
+						actionListener="#{usuarioBean.removerFuncionario}"
+						update=":formFuncionarioT:tabelaFuncionarios :mensagemGlobal">
+						<p:confirm header="Confirmação de Remoção"
+							message="Deseja Excluir o Cliente '#{funcionario.nome}'?"
+							icon="ui-icon-alert" />
+						<f:attribute name="funcionarioSelecionado" value="#{funcionario}" />
+
+					</p:commandButton>
 				</p:column>
 				<f:facet name="footer">
 					<p:commandButton value="CADASTRAR NOVO(A) FUNCIONÁRIO(A)"
-						oncomplete="PF('dlgNovoFuncionario').show();" />
+						actionListener="#{usuarioBean.preparaNovoFuncionario}"
+						oncomplete="PF('dlgNovoFuncionario').show();"
+						update=":formNovoFuncionario:panelNovoFuncionario" />
 				</f:facet>
 			</p:dataTable>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:form>
+
 		<p:dialog header="Novo(a) Funcionário(a)"
 			widgetVar="dlgNovoFuncionario" modal="true" closable="false"
 			draggable="false" resizable="false" appendTo="@(body)">
 			<h:form id="formNovoFuncionario">
 				<h:panelGrid id="panelNovoFuncionario" columns="2">
 					<p:outputLabel value="Código: " />
-					<p:inputText readonly="true" size="10" value="#{usuarioBean.usuarioCadastro.idusuario}" />
+					<p:inputText readonly="true" size="10"
+						value="#{usuarioBean.usuario.idusuario}" />
 
 					<p:outputLabel value="Nome: " />
-					<p:inputText maxlength="50" size="30" value="#{usuarioBean.usuarioCadastro.nome}"/>
+					<p:inputText maxlength="50" size="30"
+						value="#{usuarioBean.usuario.nome}">
+						<f:validateBean />
+					</p:inputText>
 
-					<p:outputLabel value="Senha: "/>
-					<p:password maxlength="8" size="10" value="#{usuarioBean.usuarioCadastro.senha}"/>
-					
+					<p:outputLabel value="CPF: " />
+					<p:inputMask mask="999.999.999-99"
+						value="#{usuarioBean.usuario.cpf}" />
+
+					<p:outputLabel value="Senha: " />
+					<p:password maxlength="8" value="#{usuarioBean.usuario.senha}" />
+
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" actionListener="#{usuarioBean.salvarUsuario}"
+					<p:commandButton value="Salvar"
+						actionListener="#{usuarioBean.salvarUsuario}"
 						oncomplete="PF('dlgNovoFuncionario').hide();"
 						update=":formFuncionarioT:tabelaFuncionarios :mensagemGlobal" />
 					<p:commandButton value="Cancelar"

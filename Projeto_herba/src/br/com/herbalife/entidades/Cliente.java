@@ -2,6 +2,11 @@ package br.com.herbalife.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,22 +24,26 @@ public class Cliente implements Serializable {
 	@Column(name="idcliente", unique=true, nullable=false)
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer idcliente;
-
+	@NotEmpty(message = "O campo de 'CIDADE' é obrigatуrio!")
+	@Size(max = 100, message = "Tamanho inválido no campo 'CIDADE'. (máx. 100 caracteres)")
 	private String cidade;
-
+	@Size(max = 100, message = "Tamanho inválido no campo 'COMPLEMENTO'. (máx. 100 caracteres)")
 	private String complemento;
-
+	@Size(max = 11)
+	@CPF(message = "O CPF informado é inválido!")
 	private String cpf;
-
+	
 	@Temporal(TemporalType.DATE)
 	private Date dtnasc;
-
+	@Size(min = 4, max = 200, message = "Tamanho inválido no campo 'ENDEREÇO'. (4 - 200 caracteres)")
+	@NotEmpty(message = "O campo de 'ENDEREÇO' é obrigatório!")
 	private String endereco;
-
+	@Size(min = 6, max = 70, message = "Tamanho inválido no campo 'NOME'. (6 - 70 caracteres)")
+	@NotEmpty(message = "O campo de 'NOME' é obrigatório!")
 	private String nomecliente;
 
 	private Integer numero;
-
+	@NotEmpty(message = "O campo de 'TELEFONE' é obrigatório!")
 	private String telefone;
 
 	//bi-directional many-to-one association to Estado
